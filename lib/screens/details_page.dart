@@ -16,11 +16,20 @@ class DetailsPage extends StatefulWidget {
 class _DetailsPageState extends State<DetailsPage> {
 
   int _itemCount;
+  dynamic _membersList;
 
   @override
   void initState() {
-    _itemCount = 0;
     super.initState();
+    _itemCount = 0;
+    _getMembers();
+  }
+  void _getMembers() async {
+    var dataT = await ClashRoyaleService.getMembers(widget.clanData["tag"]);
+    setState(() {
+      _itemCount = dataT.length;
+      _membersList = dataT;
+    });
   }
 
   @override
@@ -42,35 +51,15 @@ class _DetailsPageState extends State<DetailsPage> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Expanded(
-              child: FutureBuilder(
-                  future: ClashRoyaleService.getMembers(widget.clanData["tag"]),
-                  builder: (context, snapshot){
-                    switch(snapshot.connectionState){
-                      case ConnectionState.waiting:
-                      case ConnectionState.none:
-                        return Container(
-                          width: 200.0,
-                          height: 200.0,
-                          alignment: Alignment.center,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                            strokeWidth: 5.0,
-                          ),
-                        );
-                      default:
-                        if(snapshot.hasError) return Container(
-                          child: Center(child: Center(child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text('Ocorreu um erro :(', textAlign: TextAlign.center, style: TextStyle(color: Colors.white),),
-                            ),
-                          ))),
-                        );
-                        else return _buildSearchResults(snapshot.data);
-                    }
-                  }
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Center(
+                child: Image.network(widget.clanData['badge']['image']),
               ),
+            ),
+            Text('Total de membros $_itemCount', style: TextStyle(color: Colors.white), textAlign: TextAlign.center,),
+            Expanded(
+              child: _buildMembersResults(),
             ),
           ],
         )
@@ -78,12 +67,25 @@ class _DetailsPageState extends State<DetailsPage> {
     );
   }
 
-  Widget _buildSearchResults(results) {
-    return ListView.builder(
-      itemCount: results.length,
-      itemBuilder: (context, index) {
-        return Card(child: ListTile(title: Text(results[index]['name'])));
-      },
-    );
+  Widget _buildMembersResults() {
+    if(_membersList != null){
+      return ListView.builder(
+        itemCount: _membersList?.length,
+        itemBuilder: (context, index) {
+          return Card(child: ListTile(title: Text(_membersList[index]['name'])));
+        },
+      );
+    } else {
+      return Container(
+        child: Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            strokeWidth: 5.0,
+          ),
+        ),
+      );
+    }
+
+
   }
 }
