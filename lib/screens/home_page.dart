@@ -115,6 +115,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: <Widget>[
                   Text(snapshot.data[index]['name'], style: TextStyle(color: Theme.of(context).primaryColor),),
+                  SizedBox(width: 0, height: 10),
                   FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,
                     image: snapshot.data[index]['badge']['image'],

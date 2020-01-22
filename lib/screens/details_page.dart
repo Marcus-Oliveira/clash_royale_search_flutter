@@ -59,6 +59,7 @@ class _DetailsPageState extends State<DetailsPage> {
               ),
             ),
             Text('Total de membros $_itemCount', style: TextStyle(color: Theme.of(context).primaryColor), textAlign: TextAlign.center,),
+            SizedBox(width: 0, height: 10),
             Expanded(
               child: _buildMembersResults(),
             ),
