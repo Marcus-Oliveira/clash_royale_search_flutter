@@ -36,8 +36,9 @@ class _DetailsPageState extends State<DetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Membros do clã ${widget.clanData["name"]}'),
-          backgroundColor: Colors.black,
+          iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
+          title: Text('Membros do clã ${widget.clanData["name"]}', style: TextStyle(color: Theme.of(context).primaryColor),),
+          backgroundColor: Theme.of(context).backgroundColor,
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.share),
@@ -47,7 +48,7 @@ class _DetailsPageState extends State<DetailsPage> {
             )
           ],
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -57,7 +58,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 child: Image.network(widget.clanData['badge']['image']),
               ),
             ),
-            Text('Total de membros $_itemCount', style: TextStyle(color: Colors.white), textAlign: TextAlign.center,),
+            Text('Total de membros $_itemCount', style: TextStyle(color: Theme.of(context).primaryColor), textAlign: TextAlign.center,),
             Expanded(
               child: _buildMembersResults(),
             ),
@@ -79,7 +80,7 @@ class _DetailsPageState extends State<DetailsPage> {
       return Container(
         child: Center(
           child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
             strokeWidth: 5.0,
           ),
         ),

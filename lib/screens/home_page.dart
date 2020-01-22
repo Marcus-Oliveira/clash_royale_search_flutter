@@ -32,11 +32,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: Text('Encontre seu clã no clash royale'),
+        backgroundColor: Theme.of(context).backgroundColor,
+        title: Text('Encontre seu clã no clash royale', style: TextStyle(color: Theme.of(context).primaryColor),),
         centerTitle: true,
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).backgroundColor,
       body: Column(
         children: <Widget>[
           Padding(
@@ -44,10 +44,10 @@ class _HomePageState extends State<HomePage> {
             child: TextField(
               decoration: InputDecoration(
                   labelText: "Pesquise Aqui!",
-                  labelStyle: TextStyle(color: Colors.white),
+                  labelStyle: TextStyle(color: Theme.of(context).primaryColor),
                   border: OutlineInputBorder()
               ),
-              style: TextStyle(color: Colors.white, fontSize: 18.0),
+              style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 18.0),
               textAlign: TextAlign.center,
               onSubmitted: (text){
                 setState(() {
@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                         height: 200.0,
                         alignment: Alignment.center,
                         child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                          valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
                           strokeWidth: 5.0,
                         ),
                       );
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                         child: Center(child: Center(child: Center(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text('Ocorreu um erro :(', textAlign: TextAlign.center, style: TextStyle(color: Colors.white),),
+                            child: Text('Ocorreu um erro :(', textAlign: TextAlign.center, style: TextStyle(color: Theme.of(context).primaryColor),),
                           ),
                         ))),
                       );
@@ -114,14 +114,14 @@ class _HomePageState extends State<HomePage> {
             return GestureDetector(
               child: Column(
                 children: <Widget>[
-                  Text(snapshot.data[index]['name'], style: TextStyle(color: Colors.white),),
+                  Text(snapshot.data[index]['name'], style: TextStyle(color: Theme.of(context).primaryColor),),
                   FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,
                     image: snapshot.data[index]['badge']['image'],
                     height: 100.0,
                     fit: BoxFit.cover,
                   ),
-                  Text(snapshot.data[index]['description'], style: TextStyle(color: Colors.white),),
+                  Text(snapshot.data[index]['description'], style: TextStyle(color: Theme.of(context).primaryColor),),
                 ],
               ),
               onTap: () {
@@ -140,9 +140,9 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Icon(Icons.add, color: Colors.white, size: 70.0,),
+                    Icon(Icons.add, color: Theme.of(context).primaryColor, size: 70.0,),
                     Text("Carregar mais...",
-                      style: TextStyle(color: Colors.white, fontSize: 22.0),)
+                      style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 22.0),)
                   ],
                 ),
                 onTap: (){
