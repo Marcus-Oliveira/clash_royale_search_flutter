@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:clash_royale_search_v1/ui/home_page.dart';
+import 'package:clash_royale_search_v1/screens/home_page.dart';
 
 void main() {
   runApp(MaterialApp(

@@ -1,5 +1,5 @@
+import 'package:clash_royale_search_v1/screens/details_page.dart';
 import 'package:clash_royale_search_v1/services/clash_royale_service.dart';
-import 'package:clash_royale_search_v1/ui/clan_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:share/share.dart';
@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) =>
-                        ClanPage(snapshot.data[index]))
+                        DetailsPage(clanData: snapshot.data[index]))
                 );
               },
               onLongPress: () {

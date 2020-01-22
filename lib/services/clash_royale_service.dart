@@ -18,4 +18,14 @@ class ClashRoyaleService {
     );
     return json.decode(response.body);
   }
+
+  static Future<dynamic> getMembers(String clanTag) async {
+    http.Response response;
+
+    response = await http.get(
+        EnvironmentsConfig.clashRoyaleApiBaseUrl + "clan/$clanTag",
+        headers: {HttpHeaders.authorizationHeader: authToken}
+    );
+    return json.decode(response.body)['members'];
+  }
 }
